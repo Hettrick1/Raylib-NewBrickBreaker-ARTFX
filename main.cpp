@@ -1,7 +1,10 @@
 #include "raylib.h"
+#include "GameManager.h"
 #include <iostream>
 
 using namespace std;
+
+GameManager gameManager = GameManager();
 
 void Load();
 void Start();
@@ -25,6 +28,7 @@ void Load()
     InitWindow(1200, 800, "PONK");
     SetTargetFPS(60);
     HideCursor();
+    gameManager.Load();
 }
 
 void Start()
@@ -34,13 +38,14 @@ void Start()
 
 void Update()
 {
-
+    gameManager.Update();
 }
 
 void Draw()
 {
     BeginDrawing();
-    ClearBackground(BLANK);
+    ClearBackground(BLACK);
+    gameManager.Draw();
     EndDrawing();
 }
 
