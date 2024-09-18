@@ -9,7 +9,6 @@ private:
 	int mScore;
 	int mColones;
 	int mIndex;
-	int mLife;
 	Ball mBall;
 	Paddle mPlayerPaddle;
 	Brick mLevel1[5][10];

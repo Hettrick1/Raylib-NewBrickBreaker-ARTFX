@@ -5,7 +5,6 @@ GameManager::GameManager()
 	mScore = 0;
 	mColones = 5;
 	mIndex = 0;
-	mLife = 5;
 }
 
 GameManager::~GameManager()

@@ -34,10 +34,10 @@ void Ball::Update()
 {
 	mPos.x += mSpeed.x * GetFrameTime();
 	mPos.y += mSpeed.y * GetFrameTime();
-	if (mPos.x - mRadius < 10 || mPos.x + mRadius > GetScreenWidth() - 10) {
+	if (mPos.x - mRadius < 2 || mPos.x + mRadius > GetScreenWidth() - 2) {
 		mSpeed.x *= -1;
 	}
-	else if (mPos.y - mRadius < 10 || mPos.y + mRadius > GetScreenHeight() - 10) {
+	else if (mPos.y - mRadius < 2 || mPos.y + mRadius > GetScreenHeight() - 2) {
 		mSpeed.y *= -1;
 	}
 	if (mPlayerPaddle != nullptr) {
@@ -96,3 +96,4 @@ void Ball::SetSpeed(Vector2 newSpeed)
 {
 	mSpeed = newSpeed;
 }
+

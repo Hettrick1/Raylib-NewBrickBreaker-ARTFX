@@ -26,28 +26,28 @@ void Brick::Update(Ball& ball)
 {
 	if (!mIsDestroyed) {
 		if (CheckCollisions(ball)) {
-			if (ball.GetPos().x - ball.GetRadius() < mBrickRectangle.x) { // gauche
+			if (ball.GetPos().x - (ball.GetRadius() + 2) < mBrickRectangle.x) { // gauche
 				mColor = RED;
 				ball.SetPos(Vector2{ mBrickRectangle.x - ball.GetRadius() , ball.GetPos().y });
-				ball.SetSpeed(Vector2{ -ball.GetSpeed().x, ball.GetSpeed().y });
+				ball.SetSpeed(Vector2{ -200, ball.GetSpeed().y });
 				LooseLife();
 			}
-			else if (ball.GetPos().x + ball.GetRadius() > mBrickRectangle.x + mBrickRectangle.width) { // droite
+			else if (ball.GetPos().x + (ball.GetRadius() - 2) > mBrickRectangle.x + mBrickRectangle.width) { // droite
 				mColor = RED;
 				ball.SetPos(Vector2{ mBrickRectangle.x + mBrickRectangle.width + ball.GetRadius() , ball.GetPos().y });
-				ball.SetSpeed(Vector2{ -ball.GetSpeed().x, ball.GetSpeed().y });
+				ball.SetSpeed(Vector2{ 200, ball.GetSpeed().y });
 				LooseLife();
 			}
-			else if (ball.GetPos().y - ball.GetRadius() < mBrickRectangle.y) { // haut
+			else if (ball.GetPos().y - (ball.GetRadius() + 2) < mBrickRectangle.y) { // haut
 				mColor = RED;
 				ball.SetPos(Vector2{ ball.GetPos().x, mBrickRectangle.y - ball.GetRadius() });
-				ball.SetSpeed(Vector2{ ball.GetSpeed().x, -ball.GetSpeed().y });
+				ball.SetSpeed(Vector2{ ball.GetSpeed().x, -200 });
 				LooseLife();
 			}
-			else if (ball.GetPos().y + ball.GetRadius() > mBrickRectangle.y + mBrickRectangle.height) { // bas
+			else if (ball.GetPos().y + (ball.GetRadius() - 2) > mBrickRectangle.y + mBrickRectangle.height) { // bas
 				mColor = RED;
 				ball.SetPos(Vector2{ ball.GetPos().x, mBrickRectangle.y + mBrickRectangle.height + ball.GetRadius() });
-				ball.SetSpeed(Vector2{ ball.GetSpeed().x, -ball.GetSpeed().y });
+				ball.SetSpeed(Vector2{ ball.GetSpeed().x, 200 });
 				LooseLife();
 			}
 		}
