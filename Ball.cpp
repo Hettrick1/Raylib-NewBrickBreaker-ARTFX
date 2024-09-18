@@ -18,7 +18,7 @@ Ball::Ball(int radius, Vector2 initialPos, Vector2 initialSpeed, Camera2D* playe
 	mRadius = radius;
 	mPos = initialPos;
 	mSpeed = initialSpeed;
-	mMaxSpeed = { 200, 200 };
+	mMaxSpeed = { 400, 400 };
 	mPlayerPaddle = nullptr;
 	mPlayerCamera = playerCamera;
 	mShake = CameraShake(mPlayerCamera);
@@ -58,7 +58,7 @@ void Ball::Update()
 		}
 		if (mPos.y > mPlayerPaddle->GetRectangle().y) {
 			mPos = { 540, 400 };
-			mSpeed = { 0, 300 };
+			mSpeed = { 0, 400 };
 			mShake.SetIsPlaying(true);
 			mShake.ResetTimer();
 			mShake.AddShakeForce(10);
