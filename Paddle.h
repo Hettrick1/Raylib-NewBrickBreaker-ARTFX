@@ -4,19 +4,17 @@ class Paddle
 {
 private:
 	Rectangle mRectangle;
-	Vector2 mPos;
 	Vector2 mSpeed;
 public:
 	Paddle();
-	Paddle(Rectangle rectangle, Vector2 initialPos);
+	Paddle(Rectangle rectangle);
 	~Paddle();
 	void Load();
 	void Start();
 	void Update();
 	void Draw();
 	void Unload();
-	Rectangle GetRectangle();
-	Vector2 GetPos();
+	Rectangle GetRectangle() { return Rectangle{ mRectangle.x, mRectangle.y, mRectangle.width, mRectangle.height }; }
 	Vector2 GetSpeed();
 };
 

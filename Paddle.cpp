@@ -3,15 +3,13 @@
 Paddle::Paddle()
 {
     mRectangle = { 0, 0, 0, 0 };
-    mPos = { 0, 0 };
     mSpeed = { 0, 0 };
 }
 
-Paddle::Paddle(Rectangle rectangle, Vector2 initialPos)
+Paddle::Paddle(Rectangle rectangle)
 {
     mRectangle = rectangle;
-    mPos = initialPos;
-    mSpeed = { 0, 0 };
+    mSpeed = { 400, 0 };
 }
 
 Paddle::~Paddle()
@@ -28,27 +26,24 @@ void Paddle::Start()
 
 void Paddle::Update()
 {
+    if ((IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT)) && mRectangle.x > 0) {
+        mRectangle.x -= mSpeed.x * GetFrameTime();
+    }
+    if ((IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT)) && mRectangle.x < GetScreenWidth() - mRectangle.width) {
+        mRectangle.x += mSpeed.x * GetFrameTime();
+    }
 }
 
 void Paddle::Draw()
 {
+    DrawRectangle(mRectangle.x, mRectangle.y, mRectangle.width, mRectangle.height, WHITE);
 }
 
 void Paddle::Unload()
 {
 }
 
-Rectangle Paddle::GetRectangle()
-{
-    return Rectangle();
-}
-
-Vector2 Paddle::GetPos()
-{
-    return Vector2();
-}
-
 Vector2 Paddle::GetSpeed()
 {
-    return Vector2();
+    return mSpeed;
 }
