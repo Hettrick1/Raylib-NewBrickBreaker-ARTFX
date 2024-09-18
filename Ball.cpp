@@ -86,3 +86,13 @@ void Ball::ReferencePlayerPaddle(Paddle* playerPaddle)
 	mPlayerPaddle = playerPaddle;
 	
 }
+
+void Ball::SetPos(Vector2 newPos)
+{
+	mPos = newPos;
+}
+
+void Ball::SetSpeed(Vector2 newSpeed)
+{
+	mSpeed = newSpeed;
+}

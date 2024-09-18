@@ -23,5 +23,7 @@ public:
 	Vector2 GetPos();
 	Vector2 GetSpeed();
 	void ReferencePlayerPaddle(Paddle* playerPaddle);
+	void SetPos(Vector2 newPos);
+	void SetSpeed(Vector2 newSpeed);
 };
 
