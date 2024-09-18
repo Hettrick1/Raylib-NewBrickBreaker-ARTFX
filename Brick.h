@@ -11,14 +11,15 @@ private:
 	Color mColor;
 	int mLife;
 	bool mIsDestroyed;
+	Ball* mBallRef;
 public:
 	Brick();
-	Brick(Rectangle brickRectangle, Vector2 mapCoordinates, int lifes, Color color);
+	Brick(Rectangle brickRectangle, Vector2 mapCoordinates, int lifes, Color color, Ball* ballRef);
 	~Brick();
-	void Update(Ball& ball);
+	void Update();
 	void Draw();
 	void LooseLife();
-	bool CheckCollisions(Ball& ball);
+	bool CheckCollisions();
 	Rectangle GetBrickRectangle();
 	Vector2 GetMapCoordinates();
 	int GetLife();

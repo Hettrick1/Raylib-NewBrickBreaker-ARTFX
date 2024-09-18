@@ -1,8 +1,11 @@
 #include "GameManager.h"
 
+
+Camera2D camera = { 0 };
+
+
 GameManager::GameManager()
 {
-	mScore = 0;
 	mColones = 5;
 	mIndex = 0;
 }
@@ -13,9 +16,13 @@ GameManager::~GameManager()
 
 void GameManager::Load()
 {
-	mPlayerPaddle = Paddle({ (float)(GetScreenWidth() / 2.0 - 60), (float)(GetScreenHeight() - GetScreenHeight() / 10.0), 150, 25}); 
-	mBall = Ball(15, { 600, 400 }, { 0, 300 });
+	mPlayerPaddle = Paddle({ (float)(GetScreenWidth() / 2.0 - 75), (float)(GetScreenHeight() - GetScreenHeight() / 10.0), 150, 25}); 
+	mBall = Ball(15, { (float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2}, { 0, 300 }, &camera);
 	mBall.ReferencePlayerPaddle(&mPlayerPaddle);
+	camera.target = Vector2{ (float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2};
+	camera.offset = Vector2{ (float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2 };
+	camera.rotation = 0;
+	camera.zoom = 1.0f;
 }
 
 void GameManager::Start()
@@ -29,16 +36,16 @@ void GameManager::Update()
 			switch (mIndex)
 			{
 			case 0:
-				mLevel1[i][j].Update(mBall);
+				mLevel1[i][j].Update();
 				break;
 			case 1:
-				mLevel2[i][j].Update(mBall);
+				mLevel2[i][j].Update();
 				break;
 			case 2:
-				mLevel3[i][j].Update(mBall);
+				mLevel3[i][j].Update();
 				break;
 			case 3:
-				mLevel4[i][j].Update(mBall);
+				mLevel4[i][j].Update();
 				break;
 			};
 		}
@@ -63,6 +70,7 @@ void GameManager::Update()
 
 void GameManager::Draw()
 {
+	BeginMode2D(camera);
 	mBall.Draw();
 	mPlayerPaddle.Draw();
 	for (int i = 0; i < mColones; i++) {
@@ -84,6 +92,8 @@ void GameManager::Draw()
 			};
 		}
 	}
+	EndMode2D();
+	DrawText(TextFormat("Score : %i", mBall.GetScore()), 20, GetScreenHeight() - 50, 40, WHITE);
 }
 
 void GameManager::InitializeGame()
@@ -93,7 +103,7 @@ void GameManager::InitializeGame()
 		coordinates.x = 40;
 		coordinates.y += 22;
 		for (int j = 0; j < 10; j++) {
-			Brick brick = Brick(Rectangle{ coordinates.x, coordinates.y, 98.4, 20 }, Vector2{ (float)i, (float)j }, 1, BLUE);
+			Brick brick = Brick(Rectangle{ coordinates.x, coordinates.y, 98.4, 20 }, Vector2{ (float)i, (float)j }, 1, BLUE, &mBall);
 			switch (mIndex)
 			{
 			case 0:

@@ -2,11 +2,11 @@
 #include "Paddle.h"
 #include "Ball.h"
 #include "Brick.h"
+#include "CameraShake.h"
 
 class GameManager
 {
 private:
-	int mScore;
 	int mColones;
 	int mIndex;
 	Ball mBall;

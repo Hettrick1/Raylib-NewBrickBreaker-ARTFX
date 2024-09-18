@@ -47,3 +47,9 @@ Vector2 Paddle::GetSpeed()
 {
     return mSpeed;
 }
+
+void Paddle::SetPaddlePos(Vector2 newPos)
+{
+    mRectangle.x = newPos.x;
+    mRectangle.y = newPos.y;
+}

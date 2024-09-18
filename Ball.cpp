@@ -2,20 +2,26 @@
 
 Ball::Ball()
 {
+	mScore = 0;
 	mRadius = 0;
 	mPos = { 0, 0 };
 	mSpeed = { 0, 0 };
 	mMaxSpeed = { 200, 200 };
 	mPlayerPaddle = nullptr;
+	mPlayerCamera = nullptr;
+	mShake = CameraShake(mPlayerCamera);
 }
 
-Ball::Ball(int radius, Vector2 initialPos, Vector2 initialSpeed)
+Ball::Ball(int radius, Vector2 initialPos, Vector2 initialSpeed, Camera2D* playerCamera)
 {
+	mScore = 0;
 	mRadius = radius;
 	mPos = initialPos;
 	mSpeed = initialSpeed;
 	mMaxSpeed = { 200, 200 };
 	mPlayerPaddle = nullptr;
+	mPlayerCamera = playerCamera;
+	mShake = CameraShake(mPlayerCamera);
 }
 
 Ball::~Ball()
@@ -53,6 +59,16 @@ void Ball::Update()
 		if (mPos.y > mPlayerPaddle->GetRectangle().y) {
 			mPos = { 540, 400 };
 			mSpeed = { 0, 300 };
+			mShake.SetIsPlaying(true);
+			mShake.ResetTimer();
+			mShake.AddShakeForce(10);
+			mPlayerPaddle->SetPaddlePos({ (float)(GetScreenWidth() / 2.0 - 75), (float)(GetScreenHeight() - GetScreenHeight() / 10.0) });
+		}
+
+		mPlayerCamera->target = { (float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2 };
+
+		if (mShake.GetIsPlaying()) {
+			mShake.Play();
 		}
 	}
 }
@@ -95,5 +111,15 @@ void Ball::SetPos(Vector2 newPos)
 void Ball::SetSpeed(Vector2 newSpeed)
 {
 	mSpeed = newSpeed;
+}
+
+int Ball::GetScore()
+{
+	return mScore;
+}
+
+void Ball::AddScore(int score)
+{
+	mScore += score;
 }
 

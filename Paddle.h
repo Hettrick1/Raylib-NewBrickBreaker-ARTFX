@@ -16,5 +16,6 @@ public:
 	void Unload();
 	Rectangle GetRectangle() { return Rectangle{ mRectangle.x, mRectangle.y, mRectangle.width, mRectangle.height }; }
 	Vector2 GetSpeed();
+	void SetPaddlePos(Vector2 newPos);
 };
 

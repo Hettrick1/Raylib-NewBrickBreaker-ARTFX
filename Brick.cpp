@@ -7,49 +7,52 @@ Brick::Brick()
     mColor = Color();
     mLife = 0;
     mIsDestroyed = true;
+	mBallRef = nullptr;
 }
 
-Brick::Brick(Rectangle brickRectangle, Vector2 mapCoordinates, int lifes, Color color)
+Brick::Brick(Rectangle brickRectangle, Vector2 mapCoordinates, int lifes, Color color, Ball* ballRef)
 {
     mBrickRectangle = brickRectangle;
     mMapCoordinate = mapCoordinates;
     mColor = color;
     mLife = lifes;
     mIsDestroyed = false;
+	mBallRef = ballRef;
 }
 
 Brick::~Brick()
 {
 }
 
-void Brick::Update(Ball& ball)
+void Brick::Update()
 {
 	if (!mIsDestroyed) {
-		if (CheckCollisions(ball)) {
-			if (ball.GetPos().x - (ball.GetRadius() + 2) < mBrickRectangle.x) { // gauche
+		if (CheckCollisions()) {
+			if (mBallRef->GetPos().x - (mBallRef->GetRadius() + 2) < mBrickRectangle.x) { // gauche
 				mColor = RED;
-				ball.SetPos(Vector2{ mBrickRectangle.x - ball.GetRadius() , ball.GetPos().y });
-				ball.SetSpeed(Vector2{ -200, ball.GetSpeed().y });
+				mBallRef->SetPos(Vector2{ mBrickRectangle.x - mBallRef->GetRadius() , mBallRef->GetPos().y });
+				mBallRef->SetSpeed(Vector2{ -200, mBallRef->GetSpeed().y });
 				LooseLife();
 			}
-			else if (ball.GetPos().x + (ball.GetRadius() - 2) > mBrickRectangle.x + mBrickRectangle.width) { // droite
+			else if (mBallRef->GetPos().x + (mBallRef->GetRadius() - 2) > mBrickRectangle.x + mBrickRectangle.width) { // droite
 				mColor = RED;
-				ball.SetPos(Vector2{ mBrickRectangle.x + mBrickRectangle.width + ball.GetRadius() , ball.GetPos().y });
-				ball.SetSpeed(Vector2{ 200, ball.GetSpeed().y });
+				mBallRef->SetPos(Vector2{ mBrickRectangle.x + mBrickRectangle.width + mBallRef->GetRadius() , mBallRef->GetPos().y });
+				mBallRef->SetSpeed(Vector2{ 200, mBallRef->GetSpeed().y });
 				LooseLife();
 			}
-			else if (ball.GetPos().y - (ball.GetRadius() + 2) < mBrickRectangle.y) { // haut
+			else if (mBallRef->GetPos().y - (mBallRef->GetRadius() + 2) < mBrickRectangle.y) { // haut
 				mColor = RED;
-				ball.SetPos(Vector2{ ball.GetPos().x, mBrickRectangle.y - ball.GetRadius() });
-				ball.SetSpeed(Vector2{ ball.GetSpeed().x, -200 });
+				mBallRef->SetPos(Vector2{ mBallRef->GetPos().x, mBrickRectangle.y - mBallRef->GetRadius() });
+				mBallRef->SetSpeed(Vector2{ mBallRef->GetSpeed().x, -200 });
 				LooseLife();
 			}
-			else if (ball.GetPos().y + (ball.GetRadius() - 2) > mBrickRectangle.y + mBrickRectangle.height) { // bas
+			else if (mBallRef->GetPos().y + (mBallRef->GetRadius() - 2) > mBrickRectangle.y + mBrickRectangle.height) { // bas
 				mColor = RED;
-				ball.SetPos(Vector2{ ball.GetPos().x, mBrickRectangle.y + mBrickRectangle.height + ball.GetRadius() });
-				ball.SetSpeed(Vector2{ ball.GetSpeed().x, 200 });
+				mBallRef->SetPos(Vector2{ mBallRef->GetPos().x, mBrickRectangle.y + mBrickRectangle.height + mBallRef->GetRadius() });
+				mBallRef->SetSpeed(Vector2{ mBallRef->GetSpeed().x, 200 });
 				LooseLife();
 			}
+			mBallRef->AddScore(500);
 		}
 	}
 }
@@ -69,9 +72,9 @@ void Brick::LooseLife()
 	}
 }
 
-bool Brick::CheckCollisions(Ball& ball)
+bool Brick::CheckCollisions()
 {
-	return ball.GetPos().x - ball.GetRadius() < mBrickRectangle.x + mBrickRectangle.width && ball.GetPos().x + ball.GetRadius() > mBrickRectangle.x && ball.GetPos().y - ball.GetRadius() < mBrickRectangle.y + mBrickRectangle.height && ball.GetPos().y + ball.GetRadius() > mBrickRectangle.y;
+	return mBallRef->GetPos().x - mBallRef->GetRadius() < mBrickRectangle.x + mBrickRectangle.width && mBallRef->GetPos().x + mBallRef->GetRadius() > mBrickRectangle.x && mBallRef->GetPos().y - mBallRef->GetRadius() < mBrickRectangle.y + mBrickRectangle.height && mBallRef->GetPos().y + mBallRef->GetRadius() > mBrickRectangle.y;
 }
 
 Rectangle Brick::GetBrickRectangle()

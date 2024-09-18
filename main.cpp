@@ -1,10 +1,12 @@
 #include "raylib.h"
 #include "GameManager.h"
+#include "CameraShake.h"
 #include <iostream>
 
 using namespace std;
 
 GameManager gameManager = GameManager();
+
 
 void Load();
 void Start();
