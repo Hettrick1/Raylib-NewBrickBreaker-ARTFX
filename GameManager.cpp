@@ -98,6 +98,7 @@ void GameManager::Draw()
 
 void GameManager::InitializeGame()
 {
+	mBall.SetPos({ 540, 400 });
 	Vector2 coordinates = { 40,0 };
 	for (int i = 0; i < mColones; i++) {
 		coordinates.x = 40;
