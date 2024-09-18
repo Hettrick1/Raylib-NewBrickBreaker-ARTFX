@@ -25,7 +25,7 @@ int main() {
 }
 void Load()
 {
-    InitWindow(1200, 800, "PONK");
+    InitWindow(1080, 720, "PONK");
     SetTargetFPS(60);
     HideCursor();
     gameManager.Load();
