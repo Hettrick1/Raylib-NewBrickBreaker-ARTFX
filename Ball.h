@@ -2,6 +2,7 @@
 #include "raylib.h"
 #include "Paddle.h"
 #include "CameraShake.h"
+#include "ParticuleEffect.h"
 class Ball
 {
 private:

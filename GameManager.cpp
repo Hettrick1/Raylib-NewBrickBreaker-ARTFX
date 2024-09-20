@@ -17,7 +17,7 @@ GameManager::~GameManager()
 void GameManager::Load()
 {
 	mPlayerPaddle = Paddle({ (float)(GetScreenWidth() / 2.0 - 75), (float)(GetScreenHeight() - GetScreenHeight() / 10.0), 150, 25}); 
-	mBall = Ball(15, { (float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2}, { 0, 400 }, &camera);
+	mBall = Ball(15, { (float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2}, { 0, 500 }, &camera);
 	mBall.ReferencePlayerPaddle(&mPlayerPaddle);
 	camera.target = Vector2{ (float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2};
 	camera.offset = Vector2{ (float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2 };
@@ -98,7 +98,7 @@ void GameManager::Draw()
 
 void GameManager::InitializeGame()
 {
-	mBall.SetPos({ 540, 400 });
+	mBall.SetPos({ 560, 400 });
 	Vector2 coordinates = { 40,0 };
 	for (int i = 0; i < mColones; i++) {
 		coordinates.x = 40;
