@@ -1,8 +1,5 @@
 #include "Ball.h"
 
-ParticuleEffect explosion = ParticuleEffect(false, ParticuleType::Explosion);
-ParticuleEffect shockWave = ParticuleEffect(false, ParticuleType::ShockWave);
-
 Ball::Ball()
 {
 	mScore = 0;
@@ -24,6 +21,8 @@ Ball::Ball(int radius, Vector2 initialPos, Vector2 initialSpeed, Camera2D* playe
 	mMaxSpeed = { 500, 500 };
 	mPlayerPaddle = nullptr;
 	mPlayerCamera = playerCamera;
+	mExplosion = ParticuleEffect(false, ParticuleType::Explosion);
+	mShockWave = ParticuleEffect(false, ParticuleType::ShockWave);
 	mShake = CameraShake(mPlayerCamera);
 }
 
@@ -41,8 +40,8 @@ void Ball::Start()
 
 void Ball::Update()
 {
-	explosion.Update();
-	shockWave.Update();
+	mExplosion.Update();
+	mShockWave.Update();
 	mPos.x += mSpeed.x * GetFrameTime();
 	mPos.y += mSpeed.y * GetFrameTime();
 	if (mPos.x - mRadius < 2 || mPos.x + mRadius > GetScreenWidth() - 2) {
@@ -62,8 +61,8 @@ void Ball::Update()
 			mSpeed.y *= -1;
 		}
 		if (mPos.y > mPlayerPaddle->GetRectangle().y) {
-			explosion.PlayEffect(mPos, 80);
-			shockWave.PlayEffect(mPos, 120);
+			mExplosion.PlayEffect(mPos, 80);
+			mShockWave.PlayEffect(mPos, 120);
 			mPos = { 560, 400 };
 			mSpeed = { 0, 500 };
 			mShake.SetIsPlaying(true);
@@ -82,8 +81,8 @@ void Ball::Update()
 
 void Ball::Draw()
 {
-	explosion.Draw();
-	shockWave.Draw();
+	mExplosion.Draw();
+	mShockWave.Draw();
 	DrawCircle(mPos.x, mPos.y, mRadius, RED);
 }
 

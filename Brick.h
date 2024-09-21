@@ -1,6 +1,8 @@
 #pragma once
 #include "raylib.h"
 #include "Ball.h"
+#include "ParticuleEffect.h"
+#include "ParticuleTypeEnum.h"
 
 #include <iostream>
 class Brick
@@ -12,6 +14,7 @@ private:
 	int mLife;
 	bool mIsDestroyed;
 	Ball* mBallRef;
+	ParticuleEffect mExplosion;
 public:
 	Brick();
 	Brick(Rectangle brickRectangle, Vector2 mapCoordinates, int lifes, Color color, Ball* ballRef);

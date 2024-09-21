@@ -14,6 +14,8 @@ private:
 	Paddle* mPlayerPaddle;
 	Camera2D* mPlayerCamera;
 	CameraShake mShake;
+	ParticuleEffect mExplosion;
+	ParticuleEffect mShockWave;
 
 public:
 	Ball();

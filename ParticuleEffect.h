@@ -2,15 +2,17 @@
 #include "raylib.h"
 #include "Particule.h"
 #include "ParticuleTypeEnum.h"
-#include <vector>
+#include <deque>
+#include <iostream>
 
 class ParticuleEffect
 {
 private:
-	std::vector<Particule> mParticuleGroup;
+	std::deque<Particule> mParticuleGroup;
 	Vector2 mParticuleEffectPos;
 	bool mLoopEffect;
 	ParticuleType mType;
+	int mParticuleAmount;
 public:
 	ParticuleEffect();
 	ParticuleEffect(bool loopEffect, ParticuleType type);

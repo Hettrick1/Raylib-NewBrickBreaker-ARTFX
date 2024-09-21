@@ -23,7 +23,7 @@ public:
 	Vector2 GetParticuleSpeed();
 	Vector2 GetParticulePos();
 	Color GetParticuleColor();
-	void SetSpeed(float newSpeed);
+	bool GetIsDestroyed();
 	Vector2 Normalize(Vector2 vector);
 };
 

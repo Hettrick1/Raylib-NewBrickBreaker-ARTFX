@@ -5,6 +5,7 @@ ParticuleEffect::ParticuleEffect()
 	mLoopEffect = false;
 	mType = ParticuleType::Explosion;
 	mParticuleEffectPos = { 0, 0 };
+	mParticuleAmount = 0;
 }
 
 ParticuleEffect::ParticuleEffect(bool loopEffect, ParticuleType type)
@@ -12,6 +13,7 @@ ParticuleEffect::ParticuleEffect(bool loopEffect, ParticuleType type)
 	mLoopEffect = loopEffect;
 	mType = type;
 	mParticuleEffectPos = { 0, 0 };
+	mParticuleAmount = 0;
 }
 
 ParticuleEffect::~ParticuleEffect()
@@ -29,6 +31,14 @@ void ParticuleEffect::Update()
 		case ParticuleType::ShockWave:
 			particule.Move(-1, GetRandomValue(25, 40));
 			break;
+		case ParticuleType::BrickDestruction:
+			particule.Move(-10, GetRandomValue(15, 30));
+			break;
+		}
+	}
+	if (!mParticuleGroup.empty() && mParticuleGroup[0].GetIsDestroyed()) {
+		for (int i = 0; i < mParticuleAmount; i++) {
+			mParticuleGroup.pop_front();
 		}
 	}
 }
@@ -43,6 +53,7 @@ void ParticuleEffect::Draw()
 void ParticuleEffect::PlayEffect(Vector2 particuleEffectPos, int amount)
 {
 	mParticuleEffectPos = particuleEffectPos;
+	mParticuleAmount = amount;
 	CreateParticules(amount);
 }
 
@@ -62,5 +73,10 @@ void ParticuleEffect::CreateParticules(int amount)
 			mParticuleGroup.push_back(particule);
 		}
 		break;
+	case ParticuleType::BrickDestruction:
+		for (int i = 0; i < amount; i++) {
+			Particule particule = Particule((float)(GetRandomValue(5, 10)), { (float)(GetRandomValue(-50, 50)), (float)(GetRandomValue(-50, 50)) }, mParticuleEffectPos, DARKBLUE, 0.4, GetRandomValue(10, 200));
+			mParticuleGroup.push_back(particule);
+		}
 	}
 }

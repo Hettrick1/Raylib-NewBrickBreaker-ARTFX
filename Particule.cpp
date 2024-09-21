@@ -80,6 +80,11 @@ Color Particule::GetParticuleColor()
 	return mColor;
 }
 
+bool Particule::GetIsDestroyed()
+{
+	return mIsDestroyed;
+}
+
 Vector2 Particule::Normalize(Vector2 vector)
 {
 	float length = sqrt(vector.x * vector.x + vector.y * vector.y);

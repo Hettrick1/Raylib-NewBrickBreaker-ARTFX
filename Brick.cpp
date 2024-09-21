@@ -18,6 +18,7 @@ Brick::Brick(Rectangle brickRectangle, Vector2 mapCoordinates, int lifes, Color 
     mLife = lifes;
     mIsDestroyed = false;
 	mBallRef = ballRef;
+	mExplosion = ParticuleEffect(false, ParticuleType::BrickDestruction);
 }
 
 Brick::~Brick()
@@ -26,6 +27,7 @@ Brick::~Brick()
 
 void Brick::Update()
 {
+	mExplosion.Update();
 	if (!mIsDestroyed) {
 		if (CheckCollisions()) {
 			if (mBallRef->GetPos().x - (mBallRef->GetRadius() + 2) < mBrickRectangle.x) { // gauche
@@ -59,6 +61,7 @@ void Brick::Update()
 
 void Brick::Draw()
 {
+	mExplosion.Draw();
 	if (!mIsDestroyed) {
 		DrawRectangle(mBrickRectangle.x, mBrickRectangle.y, mBrickRectangle.width, mBrickRectangle.height, mColor);
 	}
@@ -69,6 +72,7 @@ void Brick::LooseLife()
 	mLife -= 1;
 	if (mLife <= 0) {
 		mIsDestroyed = true;
+		mExplosion.PlayEffect({ mBrickRectangle.x + mBrickRectangle.width/2, mBrickRectangle.y + mBrickRectangle.height/2}, 80);
 	}
 }
 
