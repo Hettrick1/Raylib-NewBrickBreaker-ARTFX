@@ -6,6 +6,7 @@ ParticuleEffect::ParticuleEffect()
 	mType = ParticuleType::Explosion;
 	mParticuleEffectPos = { 0, 0 };
 	mParticuleAmount = 0;
+	mColor = RED;
 }
 
 ParticuleEffect::ParticuleEffect(bool loopEffect, ParticuleType type)
@@ -14,6 +15,16 @@ ParticuleEffect::ParticuleEffect(bool loopEffect, ParticuleType type)
 	mType = type;
 	mParticuleEffectPos = { 0, 0 };
 	mParticuleAmount = 0;
+	mColor = RED;
+}
+
+ParticuleEffect::ParticuleEffect(bool loopEffect, ParticuleType type, Color color)
+{
+	mLoopEffect = loopEffect;
+	mType = type;
+	mParticuleEffectPos = { 0, 0 };
+	mParticuleAmount = 0;
+	mColor = color;
 }
 
 ParticuleEffect::~ParticuleEffect()
@@ -75,7 +86,7 @@ void ParticuleEffect::CreateParticules(int amount)
 		break;
 	case ParticuleType::BrickDestruction:
 		for (int i = 0; i < amount; i++) {
-			Particule particule = Particule((float)(GetRandomValue(5, 10)), { (float)(GetRandomValue(-50, 50)), (float)(GetRandomValue(-50, 50)) }, mParticuleEffectPos, DARKBLUE, 0.4, GetRandomValue(10, 200));
+			Particule particule = Particule((float)(GetRandomValue(5, 10)), { (float)(GetRandomValue(-50, 50)), (float)(GetRandomValue(-50, 50)) }, mParticuleEffectPos, mColor, 0.4, GetRandomValue(10, 200));
 			mParticuleGroup.push_back(particule);
 		}
 	}

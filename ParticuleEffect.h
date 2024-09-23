@@ -13,9 +13,11 @@ private:
 	bool mLoopEffect;
 	ParticuleType mType;
 	int mParticuleAmount;
+	Color mColor;
 public:
 	ParticuleEffect();
 	ParticuleEffect(bool loopEffect, ParticuleType type);
+	ParticuleEffect(bool loopEffect, ParticuleType type, Color color);
 	~ParticuleEffect();
 	void Update();
 	void Draw();

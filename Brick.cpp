@@ -18,7 +18,7 @@ Brick::Brick(Rectangle brickRectangle, Vector2 mapCoordinates, int lifes, Color 
     mLife = lifes;
     mIsDestroyed = false;
 	mBallRef = ballRef;
-	mExplosion = ParticuleEffect(false, ParticuleType::BrickDestruction);
+	mExplosion = ParticuleEffect(false, ParticuleType::BrickDestruction, mColor);
 }
 
 Brick::~Brick()
