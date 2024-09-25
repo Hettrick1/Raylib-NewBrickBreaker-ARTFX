@@ -15,9 +15,11 @@ private:
 	bool mIsDestroyed;
 	Ball* mBallRef;
 	ParticuleEffect mExplosion;
+	Camera2D* mPlayerCamera;
+	CameraShake mShake;
 public:
 	Brick();
-	Brick(Rectangle brickRectangle, Vector2 mapCoordinates, int lifes, Color color, Ball* ballRef);
+	Brick(Rectangle brickRectangle, Vector2 mapCoordinates, int lifes, Color color, Ball* ballRef, Camera2D* playerCamera);
 	~Brick();
 	void Update();
 	void Draw();

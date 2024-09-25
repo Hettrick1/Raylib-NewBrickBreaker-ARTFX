@@ -8,9 +8,11 @@ Brick::Brick()
     mLife = 0;
     mIsDestroyed = true;
 	mBallRef = nullptr;
+	mPlayerCamera = nullptr;
+	mShake = CameraShake(mPlayerCamera);
 }
 
-Brick::Brick(Rectangle brickRectangle, Vector2 mapCoordinates, int lifes, Color color, Ball* ballRef)
+Brick::Brick(Rectangle brickRectangle, Vector2 mapCoordinates, int lifes, Color color, Ball* ballRef, Camera2D* playerCamera)
 {
     mBrickRectangle = brickRectangle;
     mMapCoordinate = mapCoordinates;
@@ -19,6 +21,8 @@ Brick::Brick(Rectangle brickRectangle, Vector2 mapCoordinates, int lifes, Color 
     mIsDestroyed = false;
 	mBallRef = ballRef;
 	mExplosion = ParticuleEffect(false, ParticuleType::BrickDestruction, mColor);
+	mPlayerCamera = playerCamera;
+	mShake = CameraShake(mPlayerCamera);
 }
 
 Brick::~Brick()
@@ -55,6 +59,16 @@ void Brick::Update()
 				LooseLife();
 			}
 			mBallRef->AddScore(500);
+			mShake.SetIsPlaying(true);
+			mShake.ResetTimer();
+			mShake.AddShakeForce(10);
+		}
+	}
+	if (mPlayerCamera != nullptr) {
+		mPlayerCamera->target = { (float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2 };
+
+		if (mShake.GetIsPlaying()) {
+			mShake.Play();
 		}
 	}
 }

@@ -67,7 +67,7 @@ void Ball::Update()
 			mSpeed = { 0, 500 };
 			mShake.SetIsPlaying(true);
 			mShake.ResetTimer();
-			mShake.AddShakeForce(10);
+			mShake.AddShakeForce(50);
 			mPlayerPaddle->SetPaddlePos({ (float)(GetScreenWidth() / 2.0 - 75), (float)(GetScreenHeight() - GetScreenHeight() / 10.0) });
 		}
 

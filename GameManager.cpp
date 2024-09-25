@@ -105,7 +105,7 @@ void GameManager::InitializeGame()
 		coordinates.y += 22;
 		for (int j = 0; j < 10; j++) {
 			Color brickColor = Color{ (unsigned char)GetRandomValue(0, 255), (unsigned char)GetRandomValue(0, 255), (unsigned char)GetRandomValue(0, 255), 255 };
-			Brick brick = Brick(Rectangle{ coordinates.x, coordinates.y, 98.4, 20 }, Vector2{ (float)i, (float)j }, 1, brickColor, &mBall);
+			Brick brick = Brick(Rectangle{ coordinates.x, coordinates.y, 98.4, 20 }, Vector2{ (float)i, (float)j }, 1, brickColor, &mBall, &camera);
 			switch (mIndex)
 			{
 			case 0:
